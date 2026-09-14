@@ -6,6 +6,9 @@ export class ProductsPage extends BasePage {
         super(page);
         this.page = page;
         this.ProductSearchInput = page.locator('#ecomSearch');
+        this.firstproductCategory = page.locator('//*[contains(@data-testid,"ecom-product")]/span');
+        this.firstproductName = page.locator('//*[contains(@data-testid,"ecom-product")]/h4');
+        this.firstproductPrice = page.locator('//*[contains(@data-testid,"ecom-product")]/p');
         this.addCartButton = page.getByTestId('ecom-add-p1');
     }
     async searchProdcttextFiledValidation() {
@@ -23,6 +26,12 @@ export class ProductsPage extends BasePage {
     async searchProduct(productName) {
         await this.enterText(this.ProductSearchInput, productName);
         await this.ProductSearchInput.press('Enter');
+    }
+    async validateProductSearchResult(productName) {
+        if (await this.firstproductName.textContent() === productName) {
+            return true;
+        }
+        return false;
     }
 
 
