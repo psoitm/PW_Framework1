@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","2084","Verify Search Product Price in Result items","chromium","2026-09-15","failed","2026-09-15","","ui\product.spec.js","",""
+"","3306","Verify Search Product Availability in Result items","chromium","2026-09-15","passed","2026-09-15","","ui\product.spec.js","",""
+"","1956","Verify Search Product Name in Result items","chromium","2026-09-15","failed","2026-09-15","","ui\product.spec.js","",""
+"","2976","Verify Search Product Category in Result items","chromium","2026-09-15","passed","2026-09-15","","ui\product.spec.js","",""

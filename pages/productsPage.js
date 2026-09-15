@@ -34,6 +34,33 @@ export class ProductsPage extends BasePage {
         return false;
     }
 
+    async validateProductPrice(price) {
+        let productPrice = await this.firstproductPrice.textContent();
+
+        if (productPrice.match(/\$[\d.]+/)[0] === price) {
+            return true;
+        }
+        return false;
+    }
+
+    async validateStockAvailability() {
+        let productStock = await this.firstproductPrice.textContent();
+        if (productStock.includes('in stock')) {
+            return true;
+        }
+        return false;
+    }
+
+    async validateProductCategory(category) {
+        let productCategory = await this.firstproductCategory.textContent();
+        if (productCategory === category) {
+            return true;
+        }
+        return false;
+    }
+
+
+
 
 
 }
