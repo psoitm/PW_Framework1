@@ -12,5 +12,8 @@
     "@playwright/test": "^1.63.0",
     "@types/node": "^22.20.2",
     "allure-playwright": "^3.12.1"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0"
   }
 }

@@ -1,0 +1,14 @@
+[
+  {
+    ProductName: 'Wireless Mouse',
+    'Product Price': '$19.99',
+    Category: 'ACCESSORIES',
+    Avaialibility: 'in stock'
+  },
+  {
+    ProductName: 'Wireless Mouse',
+    'Product Price': '$19.99',
+    Category: 'ACCESSORIES',
+    Avaialibility: 'in stock'
+  }
+]
