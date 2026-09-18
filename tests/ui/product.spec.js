@@ -6,6 +6,39 @@ import { ExcelUtils } from '../../utils/excelutils.js';
 const testData = JSON.parse(JSON.stringify(require('../../testData/env.json')));
 const productData = JSON.parse(JSON.stringify(require('../../testData/products.json')));
 
+
+test.beforeAll(async () => {
+
+    console.log('Starting Product Tests');
+});
+test.beforeEach(async ({ page }) => {
+    console.log('Starting a new test');
+})
+
+test.afterAll(async () => {
+    console.log('Product Tests Completed');
+}
+)
+test.afterEach(async ({ page }) => {
+    console.log('Test completed');
+});
+
+const data = [
+    { productName: 'Wireless Mouse', price: '$10.00', category: 'Category A' },
+    { productName: 'Mechanical Keyboard', price: '$20.00', category: 'Category B' },
+    { productName: '27" 4K Monitor', price: '$30.00', category: 'Category C' }
+];
+
+for (const data1 of data) {
+    test.only(`Verify Search Product Name in Result items for ${data1.productName}`, async ({ page }) => {
+        const productsPage = new ProductsPage(page);
+        await productsPage.goToPage(testData.QA_env.website_url_e2e);
+        await productsPage.waitForPageLoad();
+        await productsPage.searchProduct(data1.productName);
+        expect(await productsPage.validateProductSearchResult(data1.productName)).toBe(true);
+    });
+}
+
 test('Verify Search Product Name in Result items', async ({ page }) => {
     const productsPage = new ProductsPage(page);
     await productsPage.goToPage(testData.QA_env.website_url_e2e);
@@ -38,12 +71,12 @@ test('Verify Search Product Category in Result items', async ({ page }) => {
     expect(await productsPage.validateProductCategory(productData.products[0].category)).toBe(true);
 });
 
-test.only("read Data From Excel", async ({ page }) => {
+test('Read Data From Excel', async ({ page }) => {
+    const excelFilePath = 'testData/data.xlsx';
+    const excelSheet = 'Sheet1';
+    const resultSheet = 'data';
 
-
-    //const data = await ExcelUtils.readExcel('testData/data.xlsx', 'Sheet1');
-    // console.log(data);
-    const cellValue = await ExcelUtils.getCellValue('testData/data.xlsx', 'Sheet1', 'A2');
+    const cellValue = await ExcelUtils.getCellValue(excelFilePath, excelSheet, 'A2');
     console.log(`Value in cell A2: ${cellValue}`);
 
     const productsPage = new ProductsPage(page);
@@ -51,8 +84,8 @@ test.only("read Data From Excel", async ({ page }) => {
     await productsPage.waitForPageLoad();
     await productsPage.searchProduct(cellValue);
     expect(await productsPage.validateProductSearchResult(cellValue)).toBe(true);
-    await ExcelUtils.writeExcel('testData/data.xlsx', 'data', ['admin', 'admin123', 'Dashboard', 'PASS']);
-    //expect(data.length).toBeGreaterThan(0);
+
+    await ExcelUtils.writeExcel(excelFilePath, resultSheet, ['admin', 'admin123', 'Dashboard', 'PASS']);
 });
 
 test("write Data To Excel", async ({ page }) => {
