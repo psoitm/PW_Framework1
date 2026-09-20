@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import { ProductsPage } from '../../pages/productsPage.js';
 
 import { ExcelUtils } from '../../utils/excelutils.js';
+import { Console } from 'console';
 
 const testData = JSON.parse(JSON.stringify(require('../../testData/env.json')));
 const productData = JSON.parse(JSON.stringify(require('../../testData/products.json')));
@@ -93,4 +94,8 @@ test("write Data To Excel", async ({ page }) => {
     const productsPage = new ProductsPage(page);
     await productsPage.goToPage(testData.QA_env.website_url_e2e);
     await productsPage.waitForPageLoad();
+    Console.log("Writing Data to Excel");
+    const excelFilePath = 'testData/data.xlsx';
+    const resultSheet = 'data';
+    await ExcelUtils.writeExcel(excelFilePath, resultSheet, ['admin', 'admin123', 'Dashboard', 'PASS']);
 });
