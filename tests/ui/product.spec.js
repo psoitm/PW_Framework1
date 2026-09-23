@@ -99,7 +99,7 @@ test("write Data To Excel", async ({ page }) => {
     const resultSheet = 'data';
     await ExcelUtils.writeExcel(excelFilePath, resultSheet, ['admin', 'admin123', 'Dashboard', 'PASS']);
 });
-test.only('test', async ({ page }) => {
+test('test', async ({ page }) => {
     await page.goto('https://vivtechguru.com/practice.html#dashboard');
     await page.locator('#navModules').getByText('Basic Elements').click();
     await page.getByTestId('txt-normal').click();
