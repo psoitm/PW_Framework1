@@ -31,7 +31,7 @@ const data = [
 ];
 
 for (const data1 of data) {
-    test.only(`Verify Search Product Name in Result items for ${data1.productName}`, async ({ page }) => {
+    test(`Verify Search Product Name in Result items for ${data1.productName}`, async ({ page }) => {
         const productsPage = new ProductsPage(page);
         await productsPage.goToPage(testData.QA_env.website_url_e2e);
         await productsPage.waitForPageLoad();
@@ -98,4 +98,33 @@ test("write Data To Excel", async ({ page }) => {
     const excelFilePath = 'testData/data.xlsx';
     const resultSheet = 'data';
     await ExcelUtils.writeExcel(excelFilePath, resultSheet, ['admin', 'admin123', 'Dashboard', 'PASS']);
+});
+test('test', async ({ page }) => {
+    await page.goto('https://vivtechguru.com/practice.html#dashboard');
+    await page.locator('#navModules').getByText('Basic Elements').click();
+    await page.getByTestId('txt-normal').click();
+    await page.getByTestId('txt-normal').fill('Pardeep');
+    await page.getByText('Fill Clear').click();
+    await page.getByTestId('txt-fill-btn').click();
+    await page.getByTestId('txt-clear-btn').click();
+    await page.getByTestId('pwd-validate-btn').click();
+    await page.getByText('FAIL — needs upper, lower,').click();
+    await page.locator('#navModules').getByText('Tabs & Accordion').click();
+    await page.getByText('Dynamic Table06').click();
+    await page.locator('#navModules').getByText('Dynamic Elements').click();
+    await page.locator('#navModules').getByText('Alerts & Dialogs').click();
+    page.once('dialog', dialog => {
+        console.log(`Dialog message: ${dialog.message()}`);
+        dialog.dismiss().catch(() => { });
+    });
+    await page.getByTestId('btn-open-confirm').click();
+    page.once('dialog', dialog => {
+        console.log(`Dialog message: ${dialog.message()}`);
+        dialog.dismiss().catch(() => { });
+    });
+    await page.getByTestId('btn-open-alert').click();
+    await page.getByText('Radio & Checkbox02').click();
+    await page.locator('#navModules').getByText('Modal Dialogs').click();
+    await page.locator('#navModules').getByText('Login Practice').click();
+    await page.locator('#navModules').getByText('Mouse & Keyboard Lab').click();
 });
