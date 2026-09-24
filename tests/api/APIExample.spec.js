@@ -38,7 +38,7 @@ test("Verify Get Request API", async ({ request }) => {
 
 // })
 
-test.only('Validate Create Object API', async ({ request }) => {
+test('Validate Create Object API', async ({ request }) => {
     const requestBody = {
         "name": "Apple MacBook",
         "data": {
