@@ -13,6 +13,7 @@ export class BasePage {
     }
 
     async enterText(locator, value) {
+
         await locator.fill(value);
     }
 
